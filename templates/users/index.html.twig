@@ -1,0 +1,120 @@
+{% extends 'base.html.twig' %} 
+
+{% block body %}
+
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <h1 class="h3 mb-2 text-gray-800">Users</h1>
+
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <a class="btn btn-primary" href="{{ path("admin.users.create") }}">Create</a>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+          <div class="row">
+            <div class="col-sm-12">
+              <table
+                class="table table-bordered dataTable"
+                id="dataTable"
+                width="100%"
+                cellspacing="0"
+                role="grid"
+                aria-describedby="dataTable_info"
+                style="width: 100%"
+              >
+                <thead>
+                  <tr role="row">
+                    <th
+                      class="sorting sorting_asc"
+                      tabindex="0"
+                      aria-controls="dataTable"
+                      rowspan="1"
+                      colspan="1"
+                      aria-sort="ascending"
+                      aria-label="Name: activate to sort column descending"
+                      style="width: 125px"
+                    >
+                      Id
+                    </th>
+                    <th
+                      class="sorting"
+                      tabindex="0"
+                      aria-controls="dataTable"
+                      rowspan="1"
+                      colspan="1"
+                      aria-label="Position: activate to sort column ascending"
+                      style="width: 197px"
+                    >
+                      Email
+                    </th>
+                    <th
+                      class="sorting"
+                      tabindex="0"
+                      aria-controls="dataTable"
+                      rowspan="1"
+                      colspan="1"
+                      aria-label="Office: activate to sort column ascending"
+                      style="width: 87px"
+                    >
+                      Role
+                    </th>
+                    <th
+                      class="sorting"
+                      tabindex="0"
+                      aria-controls="dataTable"
+                      rowspan="1"
+                      colspan="1"
+                      aria-label="Office: activate to sort column ascending"
+                      style="width: 87px"
+                    >
+                      Action
+                    </th>
+
+                  </tr>
+                </thead>
+                <tfoot>
+                  <tr>
+                    <th rowspan="1" colspan="1">Id</th>
+                    <th rowspan="1" colspan="1">Email</th>
+                    <th rowspan="1" colspan="1">role</th>
+                    <th rowspan="1" colspan="1">Action</th>
+                  </tr>
+                </tfoot>
+                <tbody>
+                  {% for user in users %}
+
+                  <tr class="odd">
+                    <td class="sorting_1">{{ user.id }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.roles|join(", ") }}</td>
+                    <td>
+                        <a class="btn btn-sm btn-primary shadow-sm" href="{{ path('admin.users.edit', { 'id': user.id }) }}">Edit</a>
+                        <a class="btn btn-sm btn-danger shadow-sm" href="{{ path('admin.users.delete', { 'id': user.id }) }}">Delete</a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-5">
+              <div
+                class="dataTables_info"
+                id="dataTable_info"
+                role="status"
+                aria-live="polite"
+              >
+                Showing {{ users|length|default("0") }} entries
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
